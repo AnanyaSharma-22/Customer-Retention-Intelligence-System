@@ -1,11 +1,4 @@
-from supabase import Client, create_client
-
-from app.core.settings import settings
-
-supabase: Client = create_client(
-    settings.SUPABASE_URL,
-    settings.SUPABASE_KEY,
-)
+from app.core.security import supabase
 
 
 def signup(name: str, email: str, password: str):

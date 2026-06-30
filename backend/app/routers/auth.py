@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException
 
 from app.schemas.auth import LoginRequest, SignUpRequest
 from app.services.auth_service import login, signup
+from fastapi import Depends
+from app.dependencies import get_current_user
 
 router = APIRouter(
     prefix="/auth",
@@ -49,3 +51,10 @@ def signin(request: LoginRequest):
             status_code=401,
             detail=str(e),
         )
+@router.get("/me")
+def get_me(current_user=Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "email": current_user.email,
+        "name": current_user.user_metadata.get("name"),
+    }
