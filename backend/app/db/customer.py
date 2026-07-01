@@ -4,7 +4,7 @@ from uuid import uuid4
 from sqlalchemy import DateTime, Float, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
+from app.db.customer_feature import CustomerFeature
 from app.db.base import Base
 
 
@@ -68,6 +68,11 @@ class Customer(Base):
     )
     predictions = relationship(
     "Prediction",
+    back_populates="customer",
+    cascade="all, delete-orphan",
+)
+    features = relationship(
+    "CustomerFeature",
     back_populates="customer",
     cascade="all, delete-orphan",
 )

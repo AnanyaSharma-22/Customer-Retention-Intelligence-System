@@ -18,3 +18,13 @@ catboost_info/
 Thumbs.db
 
 archives/
+
+backend/storage/
+
+backend/data/
+
+backend/storage/
+__pycache__/
+*.pyc
+.env
+.venv/

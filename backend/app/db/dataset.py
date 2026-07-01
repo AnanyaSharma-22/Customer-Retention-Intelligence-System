@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from sqlalchemy import Boolean
 
 
 class Dataset(Base):
@@ -43,6 +44,11 @@ class Dataset(Base):
         default="processing",
     )
 
+    mapping_completed: Mapped[bool] = mapped_column(
+    Boolean,
+    default=False,
+    )
+
     model_version: Mapped[str] = mapped_column(
         String(50),
         default="v1",
@@ -64,3 +70,5 @@ class Dataset(Base):
         back_populates="dataset",
         cascade="all, delete-orphan",
     )
+# Import after class definition so SQLAlchemy registers the model
+from app.db.customer import Customer
